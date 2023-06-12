@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 
 	helmet "github.com/danielkov/gin-helmet"
 	"github.com/gin-gonic/gin"
@@ -20,6 +21,7 @@ func init() {
 }
 
 func main() {
+	https := os.Getenv("HTTPS_ENABLED")
 
 	conn, err := database.DB.Connect()
 
@@ -31,6 +33,18 @@ func main() {
 	r.Use(helmet.Default())
 
 	router := routes.SetupRouter(r, conn)
-	// router.RunTLS(":8000", "framework/config/certs/server.crt", "framework/config/certs/server.key")
-	router.Run(":8000")
+
+	if https == "enabled" {
+
+		err := router.RunTLS(":8000", "framework/config/certs/server.crt", "framework/config/certs/server.key")
+
+		if err != nil {
+			panic(err)
+		}
+
+	} else {
+
+		router.Run(":8000")
+	}
+
 }
