@@ -6,3 +6,13 @@ Content-Type: application/json
     "valorDesejado": 900,
     "prazo": 5
 }
+
+###
+POST  https://localhost:8000/api/Simulacao
+Accept: application/json
+Content-Type: application/json
+
+{
+    "valorDesejado": 900,
+    "prazo": 5
+}
