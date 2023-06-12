@@ -36,7 +36,7 @@ func main() {
 
 	if https == "enabled" {
 
-		err := router.RunTLS(":8000", "framework/config/certs/server.crt", "framework/config/certs/server.key")
+		err = router.RunTLS(":8000", "framework/config/certs/server.crt", "framework/config/certs/server.key")
 
 		if err != nil {
 			panic(err)
